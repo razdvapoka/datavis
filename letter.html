@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        min-width: 100vw;
+        min-height: 100vh;
+        margin: 0 auto;
+        font-family: sans-serif;
+        user-select: none;
+      }
+      .relative-parent {
+        /* display: flex; */
+        /* flex-wrap: wrap; */
+        position: relative;
+        width: 120px;
+        height: 120px;
+        background: black;
+        border: 3px solid greenyellow;
+      }
+      .absolute-child {
+          
+          background: greenyellow;
+        position: absolute;
+        font-size: 30px; 
+        /* margin: 0 auto;  */
+      }
+    
+      .child-right-box {
+        width: 20px;
+        height: 75px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0%,-50%);
+      }
+
+    
+    </style>
+  </head>
+  <body>
+    
+    <div class="relative-parent">
+        <div class="absolute-child child-right-box">
+            <img src="right.png" width="20">
+        </div>
+       </div>
+    <script src="letter.js"></script>
+  </body>
+</html>

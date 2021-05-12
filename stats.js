@@ -20,7 +20,7 @@ var resultDivs = document.querySelectorAll(".result");
 
 function updateResults () {
     resultDivs.forEach(function (resultDiv, resultDivIndex) {
-        resultDiv.style.transform = "scale(" + (1 + votes[resultDivIndex]) + ")";
+        resultDiv.style.transform = "scaleX(" + (1 + votes[resultDivIndex]) + ")";
     }
     );
 
