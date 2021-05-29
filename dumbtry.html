@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div {
+    width: 100vw; 
+    height: 100vh;
+  /* border: 1px solid black; */
+}
+body {
+        /* max-width: 650px; */
+        width: 100vw; 
+        height: 100vh;
+        margin: 0 auto;
+        cursor: none;
+        
+    /* background: repeating-radial-gradient(red 0 8%, yellow 8% 16%, blue 16% 24%); */
+    background-repeat: no-repeat;
+    };
+    
+</style>
+</head>
+<body>
+
+<div onmousemove="myFunction(event)" onmouseout="clearCoor()"></div>
+
+<p id="demo"></p>
+
+<script>
+var back = document.querySelector("body");
+function myFunction(e) {
+  var x = e.clientX;
+  var y = e.clientY;
+ var coor = "Coordinates: (" + x + "," + y + ")";
+var x1= (x/1440)*100;
+var a = x1+"%";
+var y1= (y/860)*100;
+var b = y1+"%";
+console.log(a,b);
+function randomConicGradient(angle=90) {
+    return "repeating-conic-gradient(from 3deg at "+a+" "+b+", hsl(200, 100%, 50%) 0deg 15deg,hsl(200, 100%, 60%) 10deg 30deg)";  
+}
+back.style.background = randomConicGradient();
+}
+
+
+
+
+
+//   document.getElementById("demo").innerHTML = coor;
+ 
+
+function clearCoor() {
+  document.getElementById("demo").innerHTML = "";
+}
+
+
+
+</script>
+
+</body>
+</html>
