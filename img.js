@@ -1,20 +1,53 @@
-var imgArray = [];
+var dataSourceUrl = "https://api.le-systeme-solaire.net/rest/bodies";
+var fileDataSourceUrl = "bodies.json";
 
-for (var i = 0; i < 20; i++) {
-  var imgNumber = i + 1 >= 10 ? i + 1 : "0" + (i + 1);
-  var imgPath = "tiles/tiles-" + imgNumber + ".jpg";
-  imgArray.push(imgPath);
+async function getData(url) {
+    var response = await fetch(url);
+    var data = await response.json();
+    return data;
 }
 
-var imagesEl = document.querySelector(".images");
-imgArray.forEach(function (imgPath) {
-  var imgEl = document.createElement("img");
-  imgEl.style.width = "100px";
-  imgEl.src = imgPath;
-  imagesEl.appendChild(imgEl);
-});
+getData(dataSourceUrl).then(function (data) {
+    var bodies = data.bodies;
 
-var images = document.querySelectorAll("img");
-images.forEach(function (imgEl, imgElIndex) {
-  // сделать что-то с каждой из картинок
+    var bodiesWithMoons = bodies.filter (function(body) {
+        return body.moons
+    });
+
+    var BodiesSortedByMoonCount = bodiesWithMoons.sort(function(a, b) {
+        return a.moons.lenght > b.moons.length ? 1 : -1
+    });
+
+    var bodyNames = bodiesWithMoons.map(function (body) {
+        return body.englishName;
+    });
+    var moonCounts = bodiesWithMoons.map(function (body) {
+        return body.moons.length;
+    });
+
+    var ctx = document.getElementById('chart-1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: bodyNames,
+            datasets: [
+                {
+                    label: '# of Moons',
+                    data: moonCounts,
+                    borderWidth: 3,
+                    bordercolor: '#ff00ff'
+                    borderDash: [10],
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 0;
+                    max: 100,
+                },
+            },
+        },
+    });
 });
